@@ -1,5 +1,5 @@
 # chevuino
-Get information out of your GM OBD1 ECU.
+Get information out of your GM OBD1 ECU 1227747 (and similar).
 This project enables you to connect to your GM ECU from the 1980s and early 1990s.
 After connection, you have some options on how to process or view the data.
 The idea is to build an architecture that others can plug into.
@@ -7,13 +7,13 @@ The idea is to build an architecture that others can plug into.
 # Introduction
 The GM ECUs from the 1980s, such as the 1227165 and 1227747 are in loads of of old cars.
 Frustrating then, that getting data off them to properly look after your old car can be a real pain.
-Which is a shame. There are lots of cool 1980s GM (and other cars than would run great with their old engines).
+Which is a shame. There are lots of cool 1980s GM (and other classic cars than would run great with their old engines).
 
 # OBD1 Basics
 Your 1980s GM car has an Engine.
 The engine is run by an ECU.
 The ECU takes input from sensors, processes it, and sends output to the injectors etc.
-The ECU also sends its data out to the ODB1 port in the cockpit as a continuosu 160 bit/sec stream.
+The ECU also sends its data out to the ODB1 port in the cockpit as a continuous 160 bit/sec stream.
 You can tap into the stream with an Arduino without needing any electronics.
 
 # Hardware
