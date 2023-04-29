@@ -1,0 +1,169 @@
+
+
+/*
+ * 
+                        DATA STREAM A58   SPECIFICATION
+
+
+       ENGINE   USAGE:
+              4.3L TBI   (LB4)   (VIN=Z)   89     TRUCKS
+              4.3L TBI   (LB4)   (VIN=Z)   90 91 S/T TRUCKS w/auto  TRANS
+              4.3L TBI   (LB4)   (VIN=Z)   90 C/K/G/M/L/R/V TRUCKS
+              4.3L TBI   (LU2)   (VIN=B)       90 TRUCKS
+              5.0L TBI   (L03)   (VIN=H)   89, 90 TRUCKS
+              5.7L TBI   (L05)   (VIN=K)   89     TRUCKS
+              5.7L TBI   (L05)   (VIN=K)       90 TRUCKS LIGHT DUTY EMISSIONS
+              6.0L TBI   (LS0)   (VIN=P)   89     TRUCKS
+              7.4L TBI   (L19)   (VIN=N)   89     TRUCKS
+              7.4L TBI   (L19)   (VIN=N)       90 TRUCKS LIGHT DUTY EMISSIONS
+              7.4L TBI   (L19)   (VIN=N)       91 TRUCKS LIGHT DUTY EMISSIONS
+
+       ** note: the cranked in clear flood flag will not work for this
+                application. A note needs to be placed in help to explain this
+                to the technician.
+
+       DATA PIN  : READ DATA ON PIN "E" OF ALDL CONNECTOR
+
+       BAUD RATE : 160 BAUD
+                   OPEN MODE - 20 BYTES
+                   10K MODE - 20 BYTES
+                   SHORTED MODE - 20 BYTES
+
+        NOTE: THIS DATA STREAM IS ALMOST IDENTICAL TO DATA STREAM A33 -
+              WITH THE EXECEPTION TO BYTE 1 BIT 6 DEFINITION.
+        NOTE: THIS DATA STREAM IS ALMOST IDENTICAL TO DATA STREAM A35 -
+              WITH THE EXECEPTION OF BYTE 1 BITS 2, 6 & 7
+
+
+
+..HEAD02L ALDL DATA LIST
+..HEAD03L NUMBER OF DATA WORDS - 20
+..HEAD04L ALDL MODE
+..HEAD05L WORD  BIT   LOCATION
+
+    WORD  BIT   DESCRIPTION
+    ----  ---   ---------------
+      1         MODE WORD 2
+           0     ROAD SPEED PULSE OCCURRED
+           1     ESC 43B READY FOR SECOND PE
+           2     REFERENCE PULSE OCCURRED
+           3     DIAGNOSTIC SWITCH IN FACTORY TEST POSITION (3.9K)
+           4     DIAGNOSTIC SWITCH IN DIAGNOSTIC POSITION (0 OHMS)
+           5     DIAGNOSTIC SWITCH IN ALDL POSITION (10k)
+           6     1ST TIME IDLE FLAG             0 = FIRST TIMEq
+           7     IDLE FLAG 1=TPS < KISTPSI & MPH < KIDLMPH
+      2         PROMID (MSB)
+      3         PROMID (LSB)                    PROMID = (MSB)*256 + (LSB)
+      4         IAC PRESENT POSITION            N = COUNTS
+      5         COOLANT TEMPERATURE             SEE TABLE 1
+      6         VEHICLE SPEED                   MPH = N
+      7         MANIFOLD ABSOLUTE PRESSURE      VOLTS = N * .0196
+      8         ENGINE RPM                      RPM = N * 25
+      9         THROTTLE POSITION SENSOR        VOLTS = N * .0196
+      10        CLOSED LOOP INTEGRATOR          NONE
+      11        OXYGEN SENSOR                   MILLIVOLTS = N * 4.34
+      12        MALFFLG1
+           0     MALF CODE 24   VEHICLE SPEED SENSOR
+           1     (MALF CODE 23)
+           2     MALF CODE 22   THROTTLE POSITION SENSOR LOW
+           3     MALF CODE 21   THROTTLE POSITION SENSOR HIGH
+           4     MALF CODE 15   COOLANT SENSOR LOW
+           5     MALF CODE 14   COOLANT SENSOR HIGH
+           6     MALF CODE 13   OXYGEN SENSOR
+           7     MALF CODE 12   NO REFERENCE PULSES
+      13        MALFFLG2
+           0     MALF CODE 42   ELECTRONIC SPARK TIMING MONITOR ERROR
+           1     (MALF CODE 41)
+           2     (MALF CODE 35)
+           3     MALF CODE 34   MAP SENSOR LOW
+           4     MALF CODE 33   MAP SENSOR HIGH
+           5     MALF CODE 32   EXHAUST GAS RECIRCULATION FAILURE
+           6     MALF CODE 31   GOVERNOR FAILURE
+           7     (MALF CODE 25)
+      14        MALFFLG3
+           0     MALF CODE 55   ADU ERROR
+           1     MALF CODE 54   FUEL PUMP RELAY FAILURE
+           2     (MALF CODE 53)
+           3     MALF CODE 52   CAL PACK MISSING
+           4     MALF CODE 51   PROM ERROR
+           5     MALF CODE 45   OXYGEN SENSOR RICH
+           6     MALF CODE 44   OXYGEN SENSOR LEAN
+           7     MALF CODE 43   ELECTRONIC SPARK CONTROL FAILURE
+
+
+      15        MWAF1
+           0     CLEAR FLOOD FLAG                       1 = CRANKED IN C/FLOOD
+           1     LEARN CONTROL ENABLE FLAG              1 = ENABLE STORE
+           2     LOW BATTERY                            1 = LOW
+           3     4-3 DOWNSHIFT FOR TCC UNLOCK
+           4     ASYNCHRONOUS FLAG
+           5     OLD HIGH GEAR FLAG                     0 = HIGH GEAR LAST TIME
+           6     RICH LEAN FLAG                         1 = RICH  0 = LEAN
+           7     CLOSED LOOP FLAG                       1 = CLOSED LOOP
+      16        BATTERY VOLTAGE                 VOLTS = N * .1
+      17        MCU2IO
+           0     AIR SWITCH                             1 = SOLENOID ENGAGED
+           1     AIR DIVERT                             1 = SOLENOID ENGAGED
+           2     OF3 A/C                                1 = A/C DISABLED
+           3     TCC                                    1 = TCC LOCKED
+           4     PARK NEUTRAL                           0 = DRIVE
+           5     HIGH GEAR                              0 = SWITCH OPEN
+           6     FRTJ (NOT USED)
+           7     AIR CONDITIONER                        0 = A/C REQUESTED
+      18        OLDPA3                          N = COUNTS
+      19        BASE PULSE COURSE CORRECTION(BLM)
+      20        O2 CROSS COUNTS                 N = COUNTS
+
+
+
+
+
+        TABLE 1 --- COOLANT TEMPERATURE
+
+
+         A/D            DEGREES
+        COUNTS             C
+        -------         -------
+          255            -40
+          251            -30
+          250            -25
+          247            -20
+          245            -15
+          241            -10
+          237            - 5
+          231              0
+          225              5
+          218             10
+          209             15
+          199             20
+          189             25
+          177             30
+          165             35
+          152             40
+          139             45
+          126             50
+          114             55
+          102             60
+          92              65
+          81              70
+          72              75
+          64              80
+          56              85
+          50              90
+          44              95
+          39             100
+          34             105
+          30             110
+          26             115
+          23             120
+          21             125
+          18             130
+          16             135
+          14             140
+          13             145
+          12             150
+           0             200
+
+
+ */
+ 
